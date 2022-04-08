@@ -1,5 +1,7 @@
 # superhero-finder
 
+An app that consumes the [SuperHero API](https://superheroapi.com/index.html) to allow the user to find facts about their favourite superheroes.
+
 ## Project setup
 ```
 npm install
