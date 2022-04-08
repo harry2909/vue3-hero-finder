@@ -1,17 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <SuperHeroSearch />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SuperHeroSearch from "./components/SuperHeroSearch.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    SuperHeroSearch,
+  },
+};
 </script>
 
 <style>
@@ -22,5 +23,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.container{
+  display: flex;
+  margin: 50px 5%;
+  flex-direction: column;
+}
+body {
+  margin: 0;
+  background: #2f2f2f;
 }
 </style>
