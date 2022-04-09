@@ -17,8 +17,10 @@
       <div class="card-image">
         <img :src="`${hero.image.url}`" class="hero-image" />
       </div>
+      <div class="card-hero-name">
+             <h3 class="hero-name-header">{{ hero.name }}</h3>
+      </div>
       <div class="card-intro">
-        {{ hero.name }}
         <br />
         Appearance:
         <br />
@@ -98,8 +100,12 @@ h1 {
   color: white;
 }
 
+h2 {
+  font-family: "Roboto", sans-serif;
+}
+
 h3 {
-  margin: 40px 0 0;
+  font-family: "Roboto", sans-serif;
 }
 ul {
   list-style-type: none;
@@ -135,15 +141,28 @@ a {
 
 .card {
   background: white;
-  max-width: 250px;
-  width: 25%;
+  max-width: 300px;
   border-radius: 5px;
   margin: 1rem;
 }
 
 .card-intro {
   text-align: left;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
+  margin-top: -25px;
+}
+
+.card-hero-name {
+  width: 100%;
+}
+
+.hero-name-header {
+  background: #6a6a6a;
+  color: white;
+  margin-top: -6px;
+  padding: 14px;
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 
 .searchInput:focus {
@@ -158,9 +177,8 @@ a {
 
 .hero-image {
   width: 100%;
-  max-width: 250px;
-  max-height: 333px;
   height: auto;
+  object-fit: contain;
 }
 
 .searchButton {
@@ -170,5 +188,12 @@ a {
   border: none;
   background: black;
   color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 </style>
