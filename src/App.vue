@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -100,7 +100,6 @@ a {
 .hero-image {
   width: 100%;
   height: auto;
-  max-height: 390px;
   object-fit: contain;
 }
 

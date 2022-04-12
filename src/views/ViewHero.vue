@@ -10,6 +10,14 @@
       <div class="card-hero-name">
         <h3 class="hero-name-header">{{ superHero.name }}</h3>
       </div>
+      <div class="card-intro">
+          <div class="hero-info-header">
+            Appeareance:
+            <br>
+            Eye Colour: {{superHero.appearance['eye-color']}}
+            Gender: {{superHero.appearance.gender}}
+          </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +54,6 @@ export default {
               console.log('no results')
             return (this.superHero = null);
           } else {
-            this.resultMessage = null;
             return (this.superHero = res.data);
           }
         } catch (err) {

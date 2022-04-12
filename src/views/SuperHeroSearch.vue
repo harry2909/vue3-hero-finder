@@ -24,7 +24,7 @@
         <div class="card-hero-name">
           <h3 class="hero-name-header">{{ hero.name }}</h3>
         </div>
-      </router-link>>
+      </router-link>
     </div>
   </div>
 </template>
