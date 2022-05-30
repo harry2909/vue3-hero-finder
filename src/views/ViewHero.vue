@@ -11,12 +11,56 @@
         <h3 class="hero-name-header">{{ superHero.name }}</h3>
       </div>
       <div class="card-intro">
-          <div class="hero-info-header">
-            Appeareance:
-            <br>
-            Eye Colour: {{superHero.appearance['eye-color']}}
-            Gender: {{superHero.appearance.gender}}
-          </div>
+        <div class="hero-info-header">
+          <accordion>
+            <accordion-item>
+              <template v-slot:accordion-trigger>
+                <h3>Appearance</h3>
+              </template>
+              <template v-slot:accordion-content>
+                Eye Colour: <span class="accordion-text">{{ superHero.appearance["eye-color"] }}</span><br>
+                Gender: <span class="accordion-text">{{ superHero.appearance.gender }}</span><br>
+                Hair Colour: <span class="accordion-text">{{ superHero.appearance["hair-color"] }}</span><br>
+                Height: <span class="accordion-text">{{ superHero.appearance.height[0] }} / {{ superHero.appearance.height[1] }}</span><br>
+                Race: <span class="accordion-text">{{ superHero.appearance.race }}</span><br>
+                Weight: <span class="accordion-text">{{ superHero.appearance.weight[0] }} / {{ superHero.appearance.weight[1] }}</span>
+              </template>
+            </accordion-item>
+            <accordion-item>
+              <template v-slot:accordion-trigger>
+                <h3>Biography</h3>
+              </template>
+              <template v-slot:accordion-content>
+
+                Aliases: <span class="accordion-text" v-for="alias in superHero.biography.aliases" :key="alias">{{ alias }}, </span>
+                Alignment: <span class="accordion-text">{{ superHero.biography.alignment }}</span><br>
+                Alter Egos: <span class="accordion-text">{{ superHero.biography["alter-egos"] }}</span><br>
+                First Appearance: <span class="accordion-text">{{ superHero.biography["first-appearance"] }}</span><br>
+                Full Name: <span class="accordion-text">{{ superHero.biography["full-name"] }}</span><br>
+                Place of Birth: <span class="accordion-text">{{ superHero.biography["place-of-birth"] }}</span><br>
+                Publisher: <span class="accordion-text">{{ superHero.biography.publisher }}</span>
+              </template>
+            </accordion-item>
+            <accordion-item>
+              <template v-slot:accordion-trigger>
+                <h3>Connections</h3>
+              </template>
+              <template v-slot:accordion-content>
+                Group Affiliation: <span class="accordion-text">{{ superHero.connections["group-affiliation"] }}</span><br>
+                Relatives: <span class="accordion-text">{{ superHero.connections.relatives }}</span>
+              </template>
+            </accordion-item>
+            <accordion-item>
+              <template v-slot:accordion-trigger>
+                <h3>Work</h3>
+              </template>
+              <template v-slot:accordion-content>
+                Base: <span class="accordion-text">{{ superHero.work.base }}</span><br>
+                Occupation: <span class="accordion-text">{{ superHero.work.occupation }}</span>
+              </template>
+            </accordion-item>
+          </accordion>
+        </div>
       </div>
     </div>
   </div>
@@ -24,8 +68,11 @@
 
 <script>
 import axios from "axios";
+import Accordion from "../components/accordion-module";
+import AccordionItem from "../components/accordion-item";
 
 export default {
+  // use composition API
   props: ["id"],
   data() {
     return {
@@ -51,7 +98,7 @@ export default {
             },
           });
           if (res.data == null) {
-              console.log('no results')
+            console.log("no results");
             return (this.superHero = null);
           } else {
             return (this.superHero = res.data);
@@ -63,8 +110,12 @@ export default {
     },
   },
   mounted() {
-      this.getHero()
-  }
+    this.getHero();
+  },
+  components: {
+    Accordion,
+    AccordionItem,
+  },
 };
 </script>
 

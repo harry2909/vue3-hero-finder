@@ -112,6 +112,12 @@ a {
   color: white;
 }
 
+.accordion-text {
+  color: #7CADAC;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
 @media only screen and (max-width: 768px) {
   .card {
     width: 100%;
