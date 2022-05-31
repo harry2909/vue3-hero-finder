@@ -1,4 +1,8 @@
 <template>
+  <nav class="top-nav">
+    <router-link to="/top-trump" class="nav-item">Top Trump Game</router-link>
+    <router-link to="/" class="nav-item">Home</router-link>
+  </nav>
   <router-view />
 </template>
 
@@ -66,6 +70,7 @@ a {
   max-width: 300px;
   border-radius: 5px;
   margin: 1rem;
+  height: 100%;
 }
 
 .card-intro {
@@ -76,12 +81,13 @@ a {
 
 .card-hero-name {
   width: 100%;
+  margin-top: -6px;
 }
 
 .hero-name-header {
   background: #6a6a6a;
   color: white;
-  margin-top: -6px;
+  margin: 0;
   padding: 14px;
   letter-spacing: 2px;
   font-size: 20px;
@@ -109,11 +115,20 @@ a {
   border-bottom-right-radius: 5px;
   border: none;
   background: black;
-  color: white;
+  color: #42b983;
+  font-weight: bold;
+  transition: all .2s ease-in;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #42b983;
+  color: black;
+  border-radius: 1px solid black;
 }
 
 .accordion-text {
-  color: #7CADAC;
+  color: #7cadac;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -123,5 +138,28 @@ a {
     width: 100%;
     max-width: 400px;
   }
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  background: black;
+  font-weight: bold;
+  margin: 1rem;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all .2s ease-in;
+}
+
+.nav-item:hover {
+  background-color: #42b983;
+  color: black;
+  border-radius: 1px solid black;
 }
 </style>

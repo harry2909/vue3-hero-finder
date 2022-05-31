@@ -31,7 +31,6 @@
                 <h3>Biography</h3>
               </template>
               <template v-slot:accordion-content>
-
                 Aliases: <span class="accordion-text" v-for="alias in superHero.biography.aliases" :key="alias">{{ alias }}, </span>
                 Alignment: <span class="accordion-text">{{ superHero.biography.alignment }}</span><br>
                 Alter Egos: <span class="accordion-text">{{ superHero.biography["alter-egos"] }}</span><br>
