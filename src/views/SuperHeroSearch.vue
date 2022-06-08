@@ -9,7 +9,8 @@
     />
     <button class="searchButton">Search</button>
   </form>
-  <h2 class="search-message" v-if="resultMessage !== null">
+  <div v-if="loading" class="loader-container"><div class="loader"></div></div>
+    <h2 class="search-message" v-if="resultMessage !== null">
     {{ resultMessage }}
   </h2>
   <div class="cards" v-if="superHeroes !== null">
@@ -40,12 +41,14 @@ export default {
       searchTermResultID: {},
       accessToken: "121270947174101",
       resultMessage: null,
+      loading: false,
     };
   },
   methods: {
     async searchHero() {
       if (this.searchTerm !== "") {
         try {
+          this.loading = true;
           let res = await axios({
             url: `${
               "https://superheroapi.com/api.php/" +
@@ -61,13 +64,16 @@ export default {
           });
           if (res.data.results == null) {
             this.resultMessage = "No Results Found!";
+            this.loading = false;
             return (this.superHeroes = null);
           } else {
             this.resultMessage = null;
             console.log(JSON.parse(JSON.stringify(res.data.results)));
+            this.loading = false;
             return (this.superHeroes = res.data.results);
           }
         } catch (err) {
+          this.loading = false;
           console.error(err);
         }
       } else {

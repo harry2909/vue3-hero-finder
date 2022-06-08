@@ -53,7 +53,7 @@ a {
 
 .search-message {
   color: white;
-  font-style: italic;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
@@ -161,5 +161,25 @@ a {
   background-color: #42b983;
   color: black;
   border-radius: 1px solid black;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #42b983; /* Blue */
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
