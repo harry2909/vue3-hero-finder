@@ -19,6 +19,7 @@
         <div class="card-image">
           <img
             :src="`${hero.image.url ? hero.image.url : ''}`"
+            @error='$event.target.src=require("@/assets/logo.jpg")'
             class="hero-image"
           />
         </div>
