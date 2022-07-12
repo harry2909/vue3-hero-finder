@@ -67,8 +67,8 @@ a {
 
 .card {
   background: white;
-  max-width: 300px;
-  border-radius: 5px;
+  max-width: 350px;
+  border-radius: 10px;
   margin: 1rem;
   height: 100%;
 }
@@ -107,6 +107,8 @@ a {
   width: 100%;
   height: auto;
   object-fit: contain;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .searchButton {
@@ -124,7 +126,7 @@ a {
 .searchButton:hover {
   background-color: #42b983;
   color: black;
-  border-radius: 1px solid black;
+  border: 1px black solid;
 }
 
 .accordion-text {
@@ -160,7 +162,7 @@ a {
 .nav-item:hover {
   background-color: #42b983;
   color: black;
-  border-radius: 1px solid black;
+  border: 1px solid black;
 }
 
 .loader-container {
