@@ -1,12 +1,14 @@
 <template>
   <nav class="top-nav">
     <router-link to="/" class="nav-item">Home</router-link>
-    <router-link to="/top-trump" class="nav-item">Top Trump Game</router-link>
+    <router-link to="/top-trump" class="nav-item">Hero Battle</router-link>
   </nav>
   <router-view />
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,7 +17,6 @@
   color: #2c3e50;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
   margin: 0 auto;
   background: #2f2f2f;
@@ -33,6 +34,7 @@ h2 {
 h3 {
   font-family: "Roboto", sans-serif;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -43,7 +45,13 @@ li {
 }
 a {
   color: #42b983;
+  font-family: "Roboto", sans-serif;
 }
+
+p {
+  font-family: "Roboto", sans-serif;
+}
+
 .searchInput {
   padding: 10px 20px;
   border-top-left-radius: 5px;

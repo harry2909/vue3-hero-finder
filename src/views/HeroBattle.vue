@@ -1,6 +1,6 @@
 
 <template>
-  <button @click="selectHeroes" class="button">Compare Heroes</button>
+  <button @click="selectHeroes" class="button"><span v-if="selectedHeroes.firstHero == null && selectedHeroes.secondHero == null">Compare Heroes</span><span v-else>Regenerate</span></button>
   <div v-if="loading" class="loader-container"><div class="loader"></div></div>
   <div class="cards" v-if="selectedHeroes.firstHero !== null && selectedHeroes.secondHero !== null">
     <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">

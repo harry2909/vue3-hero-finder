@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/SuperHeroSearch.vue'
 import ViewHero from '../views/ViewHero.vue'
-import TopTrump from '../views/TopTrump.vue'
+import HeroBattle from '../views/HeroBattle.vue'
 
 const routes = [
   {
@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/top-trump',
     name: 'top-trump',
-    component: TopTrump,
+    component: HeroBattle,
     props: true
   }
 ]
