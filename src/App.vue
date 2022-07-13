@@ -1,7 +1,7 @@
 <template>
   <nav class="top-nav">
-    <router-link to="/top-trump" class="nav-item">Top Trump Game</router-link>
     <router-link to="/" class="nav-item">Home</router-link>
+    <router-link to="/top-trump" class="nav-item">Top Trump Game</router-link>
   </nav>
   <router-view />
 </template>
@@ -120,7 +120,7 @@ a {
   border-radius: 5px;
   transition: all .2s ease-in;
   color: #42b983;
-  border: none;
+  border: 1px solid transparent;
 }
 
 .button:hover {
@@ -133,7 +133,7 @@ a {
   padding: 10px 20px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  border: none;
+  border: 1px solid transparent;
   background: black;
   color: #42b983;
   font-weight: bold;
@@ -175,6 +175,7 @@ a {
   text-decoration: none;
   border-radius: 5px;
   transition: all .2s ease-in;
+  border: 1px solid transparent;
 }
 
 .nav-item:hover {
