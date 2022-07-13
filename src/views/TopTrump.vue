@@ -1,70 +1,21 @@
 
 <template>
-  <button @click="selectHeroes">Compare Heroes</button>
-  <div class="cards" v-if="superHero !== null">
-    <div class="card">
-      <div class="card-image">
-<!--        <img-->
-<!--            :src="`${superHero.image.url ? superHero.image.url : ''}`"-->
-<!--            class="hero-image"-->
-<!--        />-->
-      </div>
-      <div class="card-hero-name">
-<!--        <h3 class="hero-name-header">{{ superHero.name }}</h3>-->
-      </div>
-      <div class="card-intro">
-        <div class="hero-info-header">
-<!--          <accordion>-->
-<!--            <accordion-item>-->
-<!--              <template v-slot:accordion-trigger>-->
-<!--                <h3>Appearance</h3>-->
-<!--              </template>-->
-<!--              <template v-slot:accordion-content>-->
-<!--                Eye Colour: <span class="accordion-text">{{ superHero.appearance["eye-color"] }}</span><br><br>-->
-<!--                Gender: <span class="accordion-text">{{ superHero.appearance.gender }}</span><br><br>-->
-<!--                Hair Colour: <span class="accordion-text">{{ superHero.appearance["hair-color"] }}</span><br><br>-->
-<!--                Height: <span class="accordion-text">{{ superHero.appearance.height[0] }} / {{ superHero.appearance.height[1] }}</span><br><br>-->
-<!--                Race: <span class="accordion-text">{{ superHero.appearance.race }}</span><br><br>-->
-<!--                Weight: <span class="accordion-text">{{ superHero.appearance.weight[0] }} / {{ superHero.appearance.weight[1] }}</span>-->
-<!--              </template>-->
-<!--            </accordion-item>-->
-<!--            <accordion-item>-->
-<!--              <template v-slot:accordion-trigger>-->
-<!--                <h3>Biography</h3>-->
-<!--              </template>-->
-<!--              <template v-slot:accordion-content>-->
-<!--                Aliases: <span class="accordion-text" v-for="alias in superHero.biography.aliases" :key="alias">{{ alias }}, </span><br><br>-->
-<!--                Alignment: <span class="accordion-text">{{ superHero.biography.alignment }}</span><br><br>-->
-<!--                Alter Egos: <span class="accordion-text">{{ superHero.biography["alter-egos"] }}</span><br><br>-->
-<!--                First Appearance: <span class="accordion-text">{{ superHero.biography["first-appearance"] }}</span><br><br>-->
-<!--                Full Name: <span class="accordion-text">{{ superHero.biography["full-name"] }}</span><br><br>-->
-<!--                Place of Birth: <span class="accordion-text">{{ superHero.biography["place-of-birth"] }}</span><br><br>-->
-<!--                Publisher: <span class="accordion-text">{{ superHero.biography.publisher }}</span>-->
-<!--              </template>-->
-<!--            </accordion-item>-->
-<!--            <accordion-item>-->
-<!--              <template v-slot:accordion-trigger>-->
-<!--                <h3>Connections</h3>-->
-<!--              </template>-->
-<!--              <template v-slot:accordion-content>-->
-<!--                Group Affiliation: <span class="accordion-text">{{ superHero.connections["group-affiliation"] }}</span><br><br>-->
-<!--                Relatives: <span class="accordion-text">{{ superHero.connections.relatives }}</span>-->
-<!--              </template>-->
-<!--            </accordion-item>-->
-<!--            <accordion-item>-->
-<!--              <template v-slot:accordion-trigger>-->
-<!--                <h3>Work</h3>-->
-<!--              </template>-->
-<!--              <template v-slot:accordion-content>-->
-<!--                Base: <span class="accordion-text">{{ superHero.work.base }}</span><br><br>-->
-<!--                Occupation: <span class="accordion-text">{{ superHero.work.occupation }}</span>-->
-<!--              </template>-->
-<!--            </accordion-item>-->
-<!--          </accordion>-->
+  <button @click="selectHeroes" class="button">Compare Heroes</button>
+  <div v-if="loading" class="loader-container"><div class="loader"></div></div>
+  <div class="cards" v-if="selectedHeroes.firstHero !== null && selectedHeroes.secondHero !== null">
+    <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">
+        <div class="card-image">
+          <img
+              :src="`${heroes.image.url ? heroes.image.url : ''}`"
+              @error='$event.target.src=require("@/assets/logo.jpg")'
+              class="hero-image"
+          />
+        </div>
+        <div class="card-hero-name">
+          <h3 class="hero-name-header">{{ heroes.name }}</h3>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 
@@ -77,6 +28,11 @@ export default {
       superHeroArray: null,
       firstHero: null,
       secondHero: null,
+      selectedHeroes: {
+        firstHero: null,
+        secondHero: null,
+      },
+      loading: false,
       accessToken: "121270947174101",
     };
   },
@@ -108,15 +64,15 @@ export default {
       const max = Math.floor(this.superHeroArray.length - 1);
       const firstHero = Math.floor(Math.random() * (max - min + 1)) + min;
       const secondHero = Math.floor(Math.random() * (max - min + 1)) + min;
-      this.getSelectedHeroes(firstHero, secondHero);
-      console.log(this.firstHero + this.secondHero);
+      await this.getSelectedHeroes(firstHero, secondHero);
+      console.log(this.selectedHeroes.firstHero + this.selectedHeroes.secondHero);
     },
+    // TODO refactor to use axios all with multiple requests
     async getSelectedHeroes(first, second) {
       try {
+        this.loading = true;
         let firstRes = await axios({
-          url: `${
-              "https://superheroapi.com/api.php/" + this.accessToken + "/" + first
-          }`,
+          url: `${"https://superheroapi.com/api.php/" + this.accessToken + "/" + first}`,
           method: "get",
           timeout: 8000,
           headers: {
@@ -127,14 +83,12 @@ export default {
           console.log("no results");
           return (this.firstHero = null);
         } else {
-          this.firstHero = firstRes.data;
-          console.log(this.firstHero);
+          this.selectedHeroes.firstHero = firstRes.data;
+          console.log(this.selectedHeroes.firstHero);
         }
 
         let secondRes = await axios({
-          url: `${
-              "https://superheroapi.com/api.php/" + this.accessToken + "/" + second
-          }`,
+          url: `${"https://superheroapi.com/api.php/" + this.accessToken + "/" + second}`,
           method: "get",
           timeout: 8000,
           headers: {
@@ -143,10 +97,12 @@ export default {
         });
         if (secondRes.data == null) {
           console.log("no results");
-          return (this.secondHero = null);
+          return (this.selectedHeroes.secondHero = null);
         } else {
-          this.secondHero = secondRes.data;
+          this.selectedHeroes.secondHero = secondRes.data;
+          console.log(this.selectedHeroes.secondHero);
         }
+        this.loading = false;
         return 'success';
       } catch (err) {
         console.error(err);

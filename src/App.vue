@@ -111,6 +111,24 @@ a {
   border-top-right-radius: 10px;
 }
 
+.button {
+  background: black;
+  font-weight: bold;
+  margin: 1rem;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all .2s ease-in;
+  color: #42b983;
+  border: none;
+}
+
+.button:hover {
+  background-color: #42b983;
+  color: black;
+  border: 1px solid black;
+}
+
 .searchButton {
   padding: 10px 20px;
   border-top-right-radius: 5px;
