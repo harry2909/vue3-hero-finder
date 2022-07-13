@@ -222,7 +222,7 @@ p {
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateY(20px);
+  transform: translateY(25px);
   opacity: 0;
 }
 </style>

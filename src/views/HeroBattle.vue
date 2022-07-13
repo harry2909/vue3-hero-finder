@@ -15,6 +15,10 @@
         <div class="card-hero-name">
           <h3 class="hero-name-header">{{ heroes.name }}</h3>
         </div>
+      <div class="card-intro">
+        <div class="hero-info-header">
+        </div>
+      </div>
       </div>
     </div>
   </transition>
@@ -87,8 +91,12 @@ export default {
           console.log("no results");
           return (this.firstHero = null);
         } else {
-          this.selectedHeroes.firstHero = firstRes.data;
-          console.log(this.selectedHeroes.firstHero);
+          if(firstRes.data.powerstats.combat == null) {
+            await this.selectHeroes();
+          } else {
+            this.selectedHeroes.firstHero = firstRes.data;
+            console.log(this.selectedHeroes.firstHero);
+          }
         }
 
         let secondRes = await axios({
@@ -103,8 +111,12 @@ export default {
           console.log("no results");
           return (this.selectedHeroes.secondHero = null);
         } else {
-          this.selectedHeroes.secondHero = secondRes.data;
-          console.log(this.selectedHeroes.secondHero);
+          if(secondRes.data.powerstats.combat == null) {
+            await this.selectHeroes();
+          } else {
+            this.selectedHeroes.secondHero = secondRes.data;
+            console.log(this.selectedHeroes.secondHero);
+          }
         }
         this.loading = false;
         return 'success';
