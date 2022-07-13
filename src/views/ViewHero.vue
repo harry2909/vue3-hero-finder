@@ -1,4 +1,5 @@
 <template>
+  <transition name="slide-fade">
   <div class="cards" v-if="superHero !== null">
     <div class="card">
       <div class="card-image">
@@ -63,6 +64,7 @@
       </div>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>

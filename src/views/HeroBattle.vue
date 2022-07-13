@@ -2,6 +2,7 @@
 <template>
   <button @click="selectHeroes" class="button"><span v-if="selectedHeroes.firstHero == null && selectedHeroes.secondHero == null">Compare Heroes</span><span v-else>Regenerate</span></button>
   <div v-if="loading" class="loader-container"><div class="loader"></div></div>
+  <transition name="slide-fade">
   <div class="cards" v-if="selectedHeroes.firstHero !== null && selectedHeroes.secondHero !== null">
     <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">
         <div class="card-image">
@@ -16,6 +17,7 @@
         </div>
       </div>
     </div>
+  </transition>
 </template>
 
 
@@ -60,6 +62,8 @@ export default {
       }
     },
     async selectHeroes() {
+      this.selectedHeroes.firstHero = null;
+      this.selectedHeroes.secondHero = null;
       const min = 0;
       const max = Math.floor(this.superHeroArray.length - 1);
       const firstHero = Math.floor(Math.random() * (max - min + 1)) + min;

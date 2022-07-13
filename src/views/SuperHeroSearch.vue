@@ -13,6 +13,7 @@
     <h2 class="search-message" v-if="resultMessage !== null">
     {{ resultMessage }}
   </h2>
+  <transition name="slide-fade">
   <div class="cards" v-if="superHeroes !== null">
     <div class="card" v-for="(hero, index) in this.superHeroes" :key="index">
       <router-link :to="{ name: `hero`, params: { id: hero.id} }">
@@ -29,6 +30,7 @@
       </router-link>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
@@ -47,6 +49,7 @@ export default {
   },
   methods: {
     async searchHero() {
+      this.superHeroes = null;
       if (this.searchTerm !== "") {
         try {
           this.loading = true;
