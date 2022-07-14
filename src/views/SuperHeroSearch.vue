@@ -19,8 +19,8 @@
       <router-link :to="{ name: `hero`, params: { id: hero.id} }">
         <div class="card-image">
           <img
-            :src="`${hero.image.url ? hero.image.url : ''}`"
-            @error='$event.target.src=require("@/assets/logo.jpg")'
+            :src="`${hero.image.url}`"
+            @error='$event.target.src=require("@/assets/placeholder.jpg")'
             class="hero-image"
           />
         </div>

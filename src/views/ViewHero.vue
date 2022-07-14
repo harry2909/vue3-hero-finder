@@ -4,7 +4,8 @@
     <div class="card">
       <div class="card-image">
         <img
-          :src="`${superHero.image.url ? superHero.image.url : ''}`"
+          :src="`${superHero.image.url}`"
+          @error='$event.target.src=require("@/assets/placeholder.jpg")'
           class="hero-image"
         />
       </div>

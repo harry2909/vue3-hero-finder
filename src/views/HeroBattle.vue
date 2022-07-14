@@ -1,5 +1,6 @@
 
 <template>
+  <!-- TODO sort out the button changing to regenerate -->
   <button @click="selectHeroes" class="button"><span v-if="selectedHeroes.firstHero == null && selectedHeroes.secondHero == null">Compare Heroes</span><span v-else>Regenerate</span></button>
   <div v-if="loading" class="loader-container"><div class="loader"></div></div>
   <transition name="slide-fade">
@@ -7,8 +8,8 @@
     <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">
         <div class="card-image">
           <img
-              :src="`${heroes.image.url ? heroes.image.url : ''}`"
-              @error='$event.target.src=require("@/assets/logo.jpg")'
+              :src="`${heroes.image.url}`"
+              @error='$event.target.src=require("@/assets/placeholder.jpg")'
               class="hero-image"
           />
         </div>
@@ -32,8 +33,6 @@ export default {
   data() {
     return {
       superHeroArray: null,
-      firstHero: null,
-      secondHero: null,
       selectedHeroes: {
         firstHero: null,
         secondHero: null,
