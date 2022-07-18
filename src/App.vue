@@ -226,13 +226,4 @@ p {
   opacity: 0;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
-
-.show {
-  visibility: visible;
-}
-
 </style>
