@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO sort out the button changing to regenerate -->
   <button @click="selectHeroes" class="button">Compare Heroes</button>
   <div v-if="loading" class="loader-container">
     <div class="loader"></div>
@@ -66,7 +65,6 @@ export default {
       await this.getSelectedHeroes(firstHero, secondHero);
       console.log(this.selectedHeroes.firstHero + this.selectedHeroes.secondHero);
     },
-    // TODO refactor to use axios all with multiple requests
     async getSelectedHeroes(first, second) {
       this.loading = true;
       let endpoints = [
