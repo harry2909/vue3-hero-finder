@@ -20,7 +20,6 @@
         <div class="hero-info-header">
         </div>
       </div>
-      <div v-if="index === Object.keys(this.selectedHeroes).length - 1">{{ this.finished = true }}</div>
       </div>
     </div>
   </transition>
