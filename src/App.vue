@@ -225,4 +225,14 @@ p {
   transform: translateY(25px);
   opacity: 0;
 }
+
+.hidden {
+  visibility: hidden;
+}
+
+
+.show {
+  visibility: visible;
+}
+
 </style>
