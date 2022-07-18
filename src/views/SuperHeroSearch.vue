@@ -69,6 +69,7 @@ export default {
                 this.loading = false;
                 return (this.superHeroes = null);
               } else {
+                this.resultMessage = null;
                 this.superHeroes = response.data.results
               }
             }).catch(error => {

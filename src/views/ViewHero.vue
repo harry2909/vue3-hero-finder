@@ -74,7 +74,6 @@ import Accordion from "../components/accordion-module";
 import AccordionItem from "../components/accordion-item";
 
 export default {
-  // use composition API
   props: ["id"],
   data() {
     return {
@@ -85,29 +84,18 @@ export default {
   methods: {
     async getHero() {
       if (this.id !== "") {
-        try {
-          let res = await axios({
-            url: `${
-              "https://superheroapi.com/api.php/" +
-              this.accessToken +
-              "/" +
-              this.id
-            }`,
-            method: "get",
-            timeout: 8000,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          if (res.data == null) {
-            console.log("no results");
-            return (this.superHero = null);
-          } else {
-            return (this.superHero = res.data);
-          }
-        } catch (err) {
-          console.error(err);
-        }
+        await axios.get(`${"https://superheroapi.com/api.php/" + this.accessToken + "/" + this.id}`)
+            .then(response => {
+              if (response.data == null) {
+                console.log("no results");
+                return (this.superHero = null);
+              } else {
+                this.resultMessage = null;
+                this.superHero = response.data
+              }
+            }).catch(error => {
+              this.resultMessage = error
+            })
       }
     },
   },
