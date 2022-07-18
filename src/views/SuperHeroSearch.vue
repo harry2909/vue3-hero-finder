@@ -17,9 +17,8 @@
   </h2>
   <transition name="slide-fade">
     <div
-        class="cards hidden"
-        v-if="superHeroes !== null"
-        :class="{ 'show': this.finished === true }">
+        class="cards"
+        v-if="this.superHeroes !== null">
       <div
           class="card"
           v-for="(hero, index) in this.superHeroes"
@@ -32,7 +31,6 @@
                 class="hero-image"
             />
           </div>
-          <div v-if="index === Object.keys(this.superHeroes).length - 1">{{ this.finished = true }}</div>
           <div class="card-hero-name">
             <h3 class="hero-name-header">{{ hero.name }}</h3>
           </div>
@@ -54,11 +52,11 @@ export default {
       accessToken: "121270947174101",
       resultMessage: null,
       loading: false,
-      finished: null,
     };
   },
   methods: {
     async searchHero() {
+      this.$store.commit('storeHeroes', null);
       this.superHeroes = null;
       if (this.searchTerm !== "") {
         this.loading = true;
@@ -67,19 +65,26 @@ export default {
               if (response.data.results == null) {
                 this.resultMessage = "No Results Found!";
                 this.loading = false;
-                return (this.superHeroes = null);
+                return null;
               } else {
                 this.resultMessage = null;
-                this.superHeroes = response.data.results
+                this.superHeroes = response.data.results;
+                console.log(this.$store.state.superHeroes);
               }
             }).catch(error => {
               this.resultMessage = error
-            }).finally(() => this.loading = false)
+            }).finally(() => {
+              this.loading = false
+            })
+        this.$store.commit('storeHeroes', this.superHeroes);
       } else {
         this.resultMessage = "No Data Entered!";
       }
     },
   },
+  mounted() {
+    return this.superHeroes = this.$store.state.superHeroes;
+  }
 };
 </script>
 
