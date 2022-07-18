@@ -1,11 +1,12 @@
-
 <template>
   <!-- TODO sort out the button changing to regenerate -->
   <button @click="selectHeroes" class="button">Compare Heroes</button>
-  <div v-if="loading" class="loader-container"><div class="loader"></div></div>
+  <div v-if="loading" class="loader-container">
+    <div class="loader"></div>
+  </div>
   <transition name="slide-fade">
-  <div class="cards" v-if="selectedHeroes.firstHero !== null && selectedHeroes.secondHero !== null">
-    <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">
+    <div class="cards" v-if="selectedHeroes.firstHero !== null && selectedHeroes.secondHero !== null">
+      <div class="card" v-for="(heroes, index) in this.selectedHeroes" :key="index">
         <div class="card-image">
           <img
               :src="`${heroes.image.url}`"
@@ -16,10 +17,10 @@
         <div class="card-hero-name">
           <h3 class="hero-name-header">{{ heroes.name }}</h3>
         </div>
-      <div class="card-intro">
-        <div class="hero-info-header">
+        <div class="card-intro">
+          <div class="hero-info-header">
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </transition>
